@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://www.wplauncher.com
+ * @link       https://www.thejoshuatree.io
  * @since      1.0.0
  *
  * @package    Settings_Page
@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Settings_Page
  * @subpackage Settings_Page/includes
- * @author     Ben Shadle <benshadle@gmail.com>
+ * @author     Joshua Wilkeson <xeon826@gmail.com>
  */
 class Settings_Page_Deactivator {
 

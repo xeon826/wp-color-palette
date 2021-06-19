@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://www.wplauncher.com
+ * @link              https://www.thejoshuatree.io
  * @since             1.0.0
  * @package           Settings_Page
  *
  * @wordpress-plugin
  * Plugin Name:       Settings Page
- * Plugin URI:        https://www.wplauncher.com
+ * Plugin URI:        https://www.thejoshuatree.io
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
  * Author:            Ben Shadle
- * Author URI:        https://www.wplauncher.com
+ * Author URI:        https://www.thejoshuatree.io
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       settings-page

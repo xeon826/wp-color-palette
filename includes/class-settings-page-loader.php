@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://www.wplauncher.com
+ * @link       https://www.thejoshuatree.io
  * @since      1.0.0
  *
  * @package    Settings_Page
@@ -19,7 +19,7 @@
  *
  * @package    Settings_Page
  * @subpackage Settings_Page/includes
- * @author     Ben Shadle <benshadle@gmail.com>
+ * @author     Joshua Wilkeson <xeon826@gmail.com>
  */
 class Settings_Page_Loader {
 
@@ -80,6 +80,9 @@ class Settings_Page_Loader {
 	public function add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
 		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
 	}
+
+	
+
 
 	/**
 	 * A utility function that is used to register the actions and hooks into a single

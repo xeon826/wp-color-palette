@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://www.wplauncher.com
+ * @link       https://www.thejoshuatree.io
  * @since      1.0.0
  *
  * @package    Settings_Page
@@ -18,7 +18,7 @@
  *
  * @package    Settings_Page
  * @subpackage Settings_Page/admin
- * @author     Ben Shadle <benshadle@gmail.com>
+ * @author     Joshua Wilkeson <xeon826@gmail.com>
  */
 class Settings_Page_Admin {
 
@@ -76,7 +76,7 @@ class Settings_Page_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name.'-main', plugin_dir_url( __FILE__ ) . 'css/settings-page-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name.'-pickr', plugin_dir_url( __FILE__ ) . 'css/nano.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-pickr-classic', plugin_dir_url( __FILE__ ) . 'css/classic.min.css', array(), $this->version, 'all' );
 
 
 
@@ -103,7 +103,9 @@ class Settings_Page_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name.'-pickr', plugin_dir_url( __FILE__ ) . 'js/pickr.min.js', array(), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-popper', plugin_dir_url( __FILE__ ) . 'js/popper.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-tippy', plugin_dir_url( __FILE__ ) . 'js/tippy-bundle.umd.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-pickr-nano', plugin_dir_url( __FILE__ ) . 'js/pickr.min.js', array(), $this->version, false );
 		wp_enqueue_script( $this->plugin_name.'-main', plugin_dir_url( __FILE__ ) . 'js/settings-page-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
@@ -129,7 +131,7 @@ class Settings_Page_Admin {
 	public function settingsPageSettingsMessages($error_message){
 		switch ($error_message) {
 				case '1':
-						$message = __( 'There was an error adding this setting. Please try again.  If this persists, shoot us an email.', 'my-text-domain' );                 $err_code = esc_attr( 'settings_page_example_setting' );                 $setting_field = 'settings_page_example_setting';
+						$message = __( 'There was an error adding this setting. Please try again.  If this persists, shoot us an email.', 'my-text-domain' );                 $err_code = esc_attr( 'color_picker_setting' );                 $setting_field = 'color_picker_setting';
 						break;
 		}
 		$type = 'error';
@@ -157,34 +159,35 @@ class Settings_Page_Admin {
 			'settings_page_general_settings'
 		);
 		unset($args);
-		$args['value_input'] = array (
+		$args = array (
 							'type'      => 'input',
 							'subtype'   => 'text',
-							'id'    => 'settings_page_example_setting',
-							'name'      => 'settings_page_example_setting',
+							'id'    => 'color_picker_setting',
+							'name'      => 'color_picker_setting',
+							'readonly'      => 'readonly',
 							'required' => 'true',
 							'get_options_list' => '',
 							'value_type'=>'normal',
 							'wp_data' => 'option'
 					);
 		add_settings_field(
-			'settings_page_example_setting',
-			'Example Setting',
+			'color_picker_setting',
+			'Select a color from the palette then save your changes to apply.',
 			array( $this, 'settings_page_render_settings_field' ),
 			'settings_page_general_settings',
 			'settings_page_general_section',
-			$args['value_input']
+			$args
 		);
 
 
 		register_setting(
 						'settings_page_general_settings',
-						'settings_page_example_setting'
+						'color_picker_setting'
 						);
 
 	}
 	public function settings_page_display_general_account() {
-		echo '<p>These settings apply to all Plugin Name functionality.</p>';
+		echo '<p>These settings apply to all pages.</p>';
 	}
 	public function settings_page_render_settings_field($args) {
 			/* EXAMPLE INPUT
@@ -216,9 +219,9 @@ class Settings_Page_Admin {
 							$max = (isset($args['max'])) ? 'max="'.$args['max'].'"' : '';
 							if(isset($args['disabled'])){
 									// hide the actual input bc if it was just a disabled input the info saved in the database would be wrong - bc it would pass empty values and wipe the actual information
-									echo $prependStart.'<input class="'.$args['class'].'" type="'.$args['subtype'].'" id="'.$args['id'].'_disabled" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'_disabled" size="40" disabled value="' . esc_attr($value) . '" /><input type="hidden" id="'.$args['id'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
+									echo $prependStart.'<input '.$args['readonly'].' class="'.$args['class'].'" type="'.$args['subtype'].'" id="'.$args['id'].'_disabled" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'_disabled" size="40" disabled value="' . esc_attr($value) . '" /><input type="hidden" id="'.$args['id'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
 							} else {
-									echo $prependStart.'<input class="'.$args['class'].'" type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
+									echo $prependStart.'<input '.$args['readonly'].' class="'.$args['class'].'" type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
 							}
 							/*<input required="required" '.$disabled.' type="number" step="any" id="'.$this->plugin_name.'_cost2" name="'.$this->plugin_name.'_cost2" value="' . esc_attr( $cost ) . '" size="25" /><input type="hidden" id="'.$this->plugin_name.'_cost" step="any" name="'.$this->plugin_name.'_cost" value="' . esc_attr( $cost ) . '" />*/
 

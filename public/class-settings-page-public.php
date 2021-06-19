@@ -3,7 +3,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://www.wplauncher.com
+ * @link       https://www.thejoshuatree.io
  * @since      1.0.0
  *
  * @package    Settings_Page
@@ -18,7 +18,7 @@
  *
  * @package    Settings_Page
  * @subpackage Settings_Page/public
- * @author     Ben Shadle <benshadle@gmail.com>
+ * @author     Joshua Wilkeson <xeon826@gmail.com>
  */
 class Settings_Page_Public {
 
@@ -100,4 +100,18 @@ class Settings_Page_Public {
 
 	}
 
+}
+
+/**
+ * This function adds an inline style according to the rgba value chosen
+ * by the user in the settings screen.
+ * @since    1.0.0
+ */
+
+add_action('wp_head', 'my_custom_styles', 100);
+function my_custom_styles()
+{
+	if (array_key_exists('color_picker_setting', wp_load_alloptions())) {
+ 		echo '<style>body{background-color: '.wp_load_alloptions()["color_picker_setting"].' !important;}</style>';
+	}
 }

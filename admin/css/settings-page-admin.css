@@ -2,3 +2,25 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+ /* .pickr {
+   width: 210px !important;
+ }
+
+ .pickr > button {
+   width: 100% !important;
+ } */
+
+.form-table > tbody > tr > td {
+  display: flex;
+  align-items: center;
+}
+
+#color_picker_setting {
+  cursor: alias;
+}
+
+.pickr {
+  margin-left: -23px;
+  visibility: hidden;
+}

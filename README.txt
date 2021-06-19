@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: (Joshua Wilkeson)
-Donate link: https://www.wplauncher.com
+Donate link: https://www.thejoshuatree.io
 Tags: comments, spam
 Requires at least: 3.0.1
 Tested up to: 3.4
